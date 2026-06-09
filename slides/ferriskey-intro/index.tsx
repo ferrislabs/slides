@@ -194,9 +194,9 @@ const Cover: Page = () => (
           }}
         >
           Une introduction aux fondamentaux de l’IAM, et un tour d’horizon de
-          <span style={{ color: "var(--osd-text)" }}> FerrisKey</span> — la
-          plateforme open-source bâtie en Rust, pensée pour les architectures
-          cloud-native modernes.
+          <span style={{ color: "var(--osd-text)" }}> FerrisKey</span>, la
+          plateforme open-source écrite en Rust pour les environnements
+          cloud-native.
         </p>
       </div>
     </div>
@@ -301,7 +301,7 @@ const WhatIsIAM: Page = () => (
     }}
   >
     <div>
-      <Eyebrow>01 — Fondamentaux</Eyebrow>
+      <Eyebrow>01 · Fondamentaux</Eyebrow>
       <h2
         style={{
           fontFamily: "var(--osd-font-display)",
@@ -328,10 +328,9 @@ const WhatIsIAM: Page = () => (
         faire.
       </p>
       <p style={{ fontSize: 22, lineHeight: 1.55, color: dim, marginTop: 24 }}>
-        Un IAM centralise l’authentification, l’autorisation, la gestion du
-        cycle de vie des identités et l’audit — là où chaque service aurait
-        sinon réinventé sa propre couche de sécurité, partiellement et avec des
-        failles.
+        Un IAM centralise authentification, autorisation, cycle de vie des
+        identités et audit. Sans lui, chaque service finit par réinventer sa
+        propre couche de sécurité, partiellement et mal.
       </p>
     </div>
 
@@ -339,12 +338,12 @@ const WhatIsIAM: Page = () => (
       <ConceptRow
         num="01"
         title="Authentification"
-        desc="Vérifier l’identité — mots de passe, OIDC, OAuth2, magic links, MFA, WebAuthn."
+        desc="Vérifier l’identité : mots de passe, OIDC, OAuth2, magic links, MFA, WebAuthn."
       />
       <ConceptRow
         num="02"
         title="Autorisation"
-        desc="Décider ce que l’identité peut faire — rôles, permissions, scopes, claims."
+        desc="Décider ce que l’identité peut faire : rôles, permissions, scopes, claims."
       />
       <ConceptRow
         num="03"
@@ -354,12 +353,12 @@ const WhatIsIAM: Page = () => (
       <ConceptRow
         num="04"
         title="Cycle de vie"
-        desc="Provisionner, suspendre, révoquer — utilisateurs humains comme service accounts."
+        desc="Provisionner, suspendre, révoquer, pour les humains comme pour les service accounts."
       />
       <ConceptRow
         num="05"
         title="Audit &amp; observabilité"
-        desc="Tracer chaque décision d’accès — conformité, forensics, détection d’anomalies."
+        desc="Tracer chaque décision d’accès : conformité, forensics, détection d’anomalies."
       />
     </div>
 
@@ -426,7 +425,7 @@ const WhyFerrisKey: Page = () => (
       }}
     >
       <div>
-        <Eyebrow>02 — Positionnement</Eyebrow>
+        <Eyebrow>02 · Positionnement</Eyebrow>
         <h2
           style={{
             fontFamily: "var(--osd-font-display)",
@@ -444,18 +443,17 @@ const WhyFerrisKey: Page = () => (
       <div
         style={{
           fontFamily: "var(--osd-font-display)",
-          fontSize: 18,
-          color: dim,
+          fontSize: 22,
+          color: "var(--osd-text)",
           textAlign: "right",
           maxWidth: 360,
-          lineHeight: 1.5,
+          lineHeight: 1.4,
+          fontWeight: 600,
         }}
       >
-        Une alternative sérieuse
+        Tout se configure.
         <br />
-        aux IAM lourds, pensée
-        <br />
-        pour l’ère cloud-native.
+        <span style={{ color: "var(--osd-accent)" }}>Rien ne se patche.</span>
       </div>
     </div>
 
@@ -464,44 +462,43 @@ const WhyFerrisKey: Page = () => (
         fontSize: 26,
         lineHeight: 1.55,
         color: muted,
-        margin: "32px 0 40px",
+        margin: "32px 0 32px",
         maxWidth: 1500,
       }}
     >
-      Les IAM historiques — Keycloak, WSO2, Gluu — ont prouvé leur valeur, mais
-      traînent l’héritage JVM, des temps de démarrage en dizaines de secondes et
-      une empreinte mémoire qui mal s’accommode des déploiements éphémères en
-      Kubernetes. FerrisKey reprend ces standards, et les exécute sur une stack{" "}
-      <span style={{ color: "var(--osd-text)" }}>Rust async</span> conçue pour
-      la densité.
+      <span style={{ color: "var(--osd-text)" }}>Keycloak</span> et ses
+      semblables sont puissants, mais rigides. Personnaliser un flow, brancher
+      une source de données ou changer un thème finit presque toujours par une
+      extension à coder, builder et maintenir. On a construit FerrisKey pour
+      que produit et engineering arrêtent de payer ce prix.
     </p>
 
     <div
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
-        gap: 24,
+        gap: 20,
       }}
     >
       <ValueProp
         num="→ 01"
-        title="Performance native"
-        body="Async I/O Rust de bout en bout : démarrage en millisecondes, latence p99 faible, empreinte mémoire d’un binaire statique."
+        title="Étendre un flow sans coder d’extension"
+        body="Branche une data source (HTTP, gRPC, GraphQL, Kafka), pose l’auth dessus (OIDC, basic, headers) et écris une policy (native, OPA, Cerbos) pour piloter le flow. Sur Keycloak, c’est une extension à coder, builder, maintenir et redéployer."
       />
       <ValueProp
         num="→ 02"
-        title="Architecture hexagonale"
-        body="Domaine isolé des adaptateurs HTTP / DB / OIDC. Modules natifs pour MFA, audit, webhooks — extensibles sans patcher le cœur."
+        title="Personnalisation visuelle du portail"
+        body="Éditeur visuel façon Webflow pour le thème du portail d’auth. Pas de fichier monté en volume, pas de rebuild. La team produit itère seule, l’engineering garde la main sur le reste."
       />
       <ValueProp
         num="→ 03"
-        title="Cloud-native par défaut"
-        body="Chart Helm officiel, métriques Prometheus, dashboards Grafana, déploiement Kubernetes pensé dès le premier commit."
+        title="Audit & observabilité ouverts"
+        body="Le module Sea Watch trace toute la plateforme et expose événements et webhooks vers tes outils : analytics ClickHouse, pipelines, alerting. L’observabilité cesse d’être une boîte noire."
       />
       <ValueProp
         num="→ 04"
-        title="Open source, sans paywall"
-        body="Apache 2.0, intégralité du code et des fonctionnalités sur GitHub. Pas de tier Enterprise verrouillé en SaaS."
+        title="CIAM et WIAM dans un seul produit"
+        body="Un panneau CIAM prêt à l’emploi façon Auth0 pour adresser les SaaS, et un IAM complet façon WIAM pour les exigences de sécurité interne des grandes entreprises. Un seul outil, deux usages."
       />
     </div>
 
@@ -602,7 +599,7 @@ const Comparison: Page = () => (
       }}
     >
       <div>
-        <Eyebrow>03 — Comparaison</Eyebrow>
+        <Eyebrow>03 · Comparaison</Eyebrow>
         <h2
           style={{
             fontFamily: "var(--osd-font-display)",
@@ -673,22 +670,22 @@ const Comparison: Page = () => (
         num="01"
         criterion="Simplicité"
         subtitle="Empreinte & modèle de déploiement"
-        keycloak="JVM (Quarkus), démarrage en secondes, plusieurs centaines de Mo en mémoire, GC à tuner — autant de surprises que le SRE doit apprivoiser en production."
+        keycloak="JVM (Quarkus), démarrage en secondes, plusieurs centaines de Mo en mémoire, GC à tuner. Autant de surprises que le SRE doit apprivoiser en production."
         ferriskey="Pas de JVM, pas de GC. Rust optimise la mémoire par design : binaire statique léger, démarrage en millisecondes, comportement prévisible en prod."
       />
       <ComparisonRow
         num="02"
         criterion="Connectivité"
         subtitle="API first & déclarative dès la conception"
-        keycloak="REST héritée centrée sur l’objet. Modifier un champ impose un GET complet, un merge local, puis un PUT — pénible à automatiser sans écraser le reste."
-        ferriskey="API déclarative dès l’origine. Patch granulaire, provider Terraform direct, intégrations natives — un IAM réellement scriptable et extensible aux services externes."
+        keycloak="REST héritée, centrée sur l’objet. Modifier un champ impose un GET complet, un merge local, puis un PUT. Pénible à automatiser sans écraser le reste."
+        ferriskey="API déclarative dès l’origine. Patch granulaire, provider Terraform direct, intégrations natives. Un IAM réellement scriptable, et extensible aux services externes."
       />
       <ComparisonRow
         num="03"
         criterion="Modularité"
         subtitle="Cœur DDD & observabilité native"
-        keycloak="SPI Java et classpath partagé. Chaque extension touche au cœur et exige une recompilation — adopter un nouveau standard coûte cher."
-        ferriskey="Modules isolés par bounded context (DDD). AuthZen, Webhooks, Orgs, XAA — chaque brique se branche sans patcher le core, observabilité native par module."
+        keycloak="SPI Java et classpath partagé. Chaque extension touche au cœur et exige une recompilation. Adopter un nouveau standard coûte cher."
+        ferriskey="Modules isolés par bounded context (DDD). AuthZen, Webhooks, Orgs, XAA : chaque brique se branche sans patcher le core, observabilité native par module."
       />
     </div>
 
@@ -760,7 +757,7 @@ const StackLayer = ({
 
 const Architecture: Page = () => (
   <div style={{ ...fill, padding: "90px 120px 120px" }}>
-    <Eyebrow>04 — Sous le capot</Eyebrow>
+    <Eyebrow>04 · Sous le capot</Eyebrow>
     <h2
       style={{
         fontFamily: "var(--osd-font-display)",
@@ -783,9 +780,9 @@ const Architecture: Page = () => (
         maxWidth: 1500,
       }}
     >
-      Une séparation stricte domaine / infrastructure (hexagonale), un cœur Rust
-      qui ne connaît ni Postgres ni HTTP, et des adaptateurs isolés que l’on
-      peut remplacer sans toucher à la logique métier.
+      Séparation stricte entre domaine et infrastructure. Un cœur Rust qui ne
+      connaît ni Postgres ni HTTP, et des adaptateurs isolés que l’on remplace
+      sans toucher à la logique métier.
     </p>
 
     <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -959,7 +956,7 @@ const Features: Page = () => (
       }}
     >
       <div>
-        <Eyebrow>05 — Capacités</Eyebrow>
+        <Eyebrow>05 · Capacités</Eyebrow>
         <h2
           style={{
             fontFamily: "var(--osd-font-display)",
@@ -1005,33 +1002,33 @@ const Features: Page = () => (
       />
       <FeatureCard
         num="03"
-        name="LDAP"
-        desc="Fédération d’annuaires d’entreprise — synchronisation utilisateurs et groupes Active Directory."
-      />
-      <FeatureCard
-        num="04"
         name="Realms multi-tenants"
         desc="Isolation logique d’utilisateurs, rôles, clients et thèmes. Un realm par tenant ou environnement."
       />
       <FeatureCard
+        num="04"
+        name="Organizations & groupes"
+        desc="Hiérarchies organisationnelles : groupes imbriqués, rôles hérités, partage de policies entre équipes."
+      />
+      <FeatureCard
         num="05"
-        name="Service accounts"
-        desc="Identités machine first-class avec mapping de rôles bitwise — autorisation O(1) sur le chemin chaud."
+        name="Webhooks"
+        desc="Souscription aux événements internes. Externaliser les events, synchroniser plusieurs services."
       />
       <FeatureCard
         num="06"
-        name="Webhooks"
-        desc="Souscription aux événements internes de FerrisKey. Externaliser les events, synchroniser plusieurs services."
+        name="GitOps & IaC"
+        desc="Provider Terraform, CLI, Operator Kubernetes, chart Helm officiel. Pilotable depuis ArgoCD."
       />
       <FeatureCard
         num="07"
-        name="Observabilité"
-        desc="Métriques Prometheus par défaut, dashboards Grafana versionnés, audit log structuré JSON."
+        name="User Federation / IdP"
+        desc="Fédération d’annuaires et de fournisseurs externes : LDAP, Active Directory, IdP OIDC tiers."
       />
       <FeatureCard
         num="08"
-        name="Cloud-native"
-        desc="Chart Helm officiel, image Docker distroless, config 12-factor, prêt pour GitOps et Argo CD."
+        name="Plateforme CIAM"
+        desc="Portail clients prêt à l’emploi : signup, login social, gestion de profil, branding éditable visuellement."
       />
       <ModuleCard
         num="09"
@@ -1041,7 +1038,7 @@ const Features: Page = () => (
       <ModuleCard
         num="10"
         name="Compass"
-        desc="Moteur de flux d’authentification. Orchestration de scénarios conditionnels et step-up auth — adapter la sécurité au contexte de chaque requête."
+        desc="Moteur de flux d’authentification. Orchestration de scénarios conditionnels et step-up auth, pour adapter la sécurité au contexte de chaque requête."
       />
     </div>
 
@@ -1127,7 +1124,7 @@ const Roadmap: Page = () => (
       }}
     >
       <div>
-        <Eyebrow>06 — À venir</Eyebrow>
+        <Eyebrow>06 · À venir</Eyebrow>
         <h2
           style={{
             fontFamily: "var(--osd-font-display)",
@@ -1165,10 +1162,9 @@ const Roadmap: Page = () => (
         maxWidth: 1500,
       }}
     >
-      Au-delà des fondations OIDC, FerrisKey explore les standards émergents de
-      l’IAM moderne — autorisation déléguée, flux pour appareils sans
-      navigateur, conformité européenne, et un socle i18n pour s’adresser à
-      toutes les équipes.
+      Au-delà des fondations OIDC, FerrisKey explore les standards émergents :
+      autorisation déléguée, flux pour appareils sans navigateur, conformité
+      européenne, et un socle i18n pour parler à toutes les équipes.
     </p>
 
     <div
@@ -1182,22 +1178,22 @@ const Roadmap: Page = () => (
       <RoadmapCard
         tag="↗ v0.7"
         name="AuthZen → MCP"
-        desc="Bridge entre le standard d’autorisation AuthZen et le Model Context Protocol — exposer les décisions IAM aux agents LLM de manière standardisée."
+        desc="Pont entre le standard d’autorisation AuthZen et le Model Context Protocol, pour exposer les décisions IAM aux agents LLM de façon standardisée."
       />
       <RoadmapCard
         tag="↗ v0.7"
         name="Device & Code flow"
-        desc="OAuth 2.0 Device Authorization Grant (RFC 8628) — auth sur TVs, CLIs, IoT et tout appareil dépourvu de navigateur web."
+        desc="OAuth 2.0 Device Authorization Grant (RFC 8628) : auth sur TVs, CLIs, IoT et tout appareil dépourvu de navigateur web."
       />
       <RoadmapCard
         tag="↗ v0.8"
         name="PDP externalisé"
-        desc="Policy Decision Point dédié — découpler les règles d’autorisation du runtime applicatif, dans l’esprit XACML et Open Policy Agent."
+        desc="Policy Decision Point dédié, pour découpler les règles d’autorisation du runtime applicatif. Dans l’esprit XACML et Open Policy Agent."
       />
       <RoadmapCard
         tag="↗ v0.8"
         name="Pipelines d’import"
-        desc="Migrations clé-en-main depuis Keycloak, Auth0 et Okta — utilisateurs, realms, rôles, sessions et hashes de mots de passe préservés."
+        desc="Migrations clé-en-main depuis Keycloak, Auth0 et Okta. Utilisateurs, realms, rôles, sessions et hashes de mots de passe préservés."
       />
       <RoadmapCard
         tag="↗ v0.9"
@@ -1207,7 +1203,7 @@ const Roadmap: Page = () => (
       <RoadmapCard
         tag="↗ v0.9"
         name="Multi-langue"
-        desc="Console d’administration et templates email entièrement i18n — démarrage avec FR, EN, DE, ES, JA, ZH."
+        desc="Console d’administration et templates email entièrement i18n, dès le départ en FR, EN, DE, ES, JA et ZH."
       />
     </div>
 
@@ -1280,7 +1276,7 @@ const ResourceRow = ({ cmd, label }: { cmd: string; label: string }) => (
 const Ecosystem: Page = () => (
   <div style={{ ...fill, padding: "100px 120px 120px" }}>
     <div>
-      <Eyebrow>07 — Écosystème</Eyebrow>
+      <Eyebrow>07 · Écosystème</Eyebrow>
       <h2
         style={{
           fontFamily: "var(--osd-font-display)",
@@ -1378,7 +1374,7 @@ const Ecosystem: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: "Introduction aux IAM — FerrisKey",
+  title: "Introduction aux IAM · FerrisKey",
   createdAt: "2026-06-09T07:45:31.937Z",
 };
 
