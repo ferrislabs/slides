@@ -1278,10 +1278,8 @@ const ResourceRow = ({ cmd, label }: { cmd: string; label: string }) => (
 );
 
 const Ecosystem: Page = () => (
-  <div style={{ ...fill, padding: "100px 120px 120px", overflow: "hidden" }}>
-    <GridBackdrop />
-
-    <div style={{ position: "relative", zIndex: 1 }}>
+  <div style={{ ...fill, padding: "100px 120px 120px" }}>
+    <div>
       <Eyebrow>07 — Écosystème</Eyebrow>
       <h2
         style={{
@@ -1364,7 +1362,7 @@ const Ecosystem: Page = () => (
             label="Code source, issues, PRs, roadmap publique"
           />
           <ResourceRow
-            cmd="ferriskey.rs/docs"
+            cmd="docs.ferriskey.rs"
             label="Documentation, guides d’intégration OIDC"
           />
           <ResourceRow
