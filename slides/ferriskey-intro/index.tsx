@@ -5,6 +5,7 @@ import type {
   SlideTransition,
 } from "@open-slide/core";
 import { useSlidePageNumber } from "@open-slide/core";
+import discordQR from "./assets/discord-qr.svg";
 
 export const design: DesignSystem = {
   palette: { bg: "#fafaf9", text: "#1c1917", accent: "#ea580c" },
@@ -568,22 +569,23 @@ const ComparisonRow = ({
       style={{
         fontSize: 21,
         lineHeight: 1.5,
-        color: muted,
-        paddingRight: 16,
-      }}
-    >
-      {keycloak}
-    </div>
-    <div
-      style={{
-        fontSize: 21,
-        lineHeight: 1.5,
         color: "var(--osd-text)",
         borderLeft: `2px solid var(--osd-accent)`,
         paddingLeft: 24,
       }}
     >
       {ferriskey}
+    </div>
+    <div
+      style={{
+        fontSize: 21,
+        lineHeight: 1.5,
+        color: muted,
+        paddingLeft: 24,
+        borderLeft: `1px solid ${border}`,
+      }}
+    >
+      {keycloak}
     </div>
   </div>
 );
@@ -610,7 +612,8 @@ const Comparison: Page = () => (
             letterSpacing: "-0.01em",
           }}
         >
-          FerrisKey <span style={{ color: dim }}>vs</span>{" "}
+          <span style={{ color: "var(--osd-accent)" }}>FerrisKey</span>{" "}
+          <span style={{ color: dim }}>vs</span>{" "}
           <span style={{ color: muted }}>Keycloak</span>
         </h2>
       </div>
@@ -621,7 +624,7 @@ const Comparison: Page = () => (
           color: dim,
           textAlign: "right",
           lineHeight: 1.5,
-          maxWidth: 340,
+          maxWidth: 460,
         }}
       >
         Simplicité · Connectivité · Modularité
@@ -644,17 +647,6 @@ const Comparison: Page = () => (
         style={{
           fontFamily: "var(--osd-font-display)",
           fontSize: 14,
-          color: dim,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-        }}
-      >
-        Keycloak · référence historique
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--osd-font-display)",
-          fontSize: 14,
           color: "var(--osd-accent)",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
@@ -662,6 +654,18 @@ const Comparison: Page = () => (
         }}
       >
         FerrisKey · alternative cloud-native
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--osd-font-display)",
+          fontSize: 14,
+          color: dim,
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+          paddingLeft: 24,
+        }}
+      >
+        Keycloak · référence historique
       </div>
     </div>
 
@@ -748,6 +752,7 @@ const StackLayer = ({
         fontSize: 15,
         color: dim,
         textAlign: "right",
+        whiteSpace: "nowrap",
       }}
     >
       {meta}
@@ -1135,7 +1140,7 @@ const Roadmap: Page = () => (
             letterSpacing: "-0.01em",
           }}
         >
-          Projets <span style={{ color: "var(--osd-accent)" }}>à venir</span>
+          Features <span style={{ color: "var(--osd-accent)" }}>à venir</span>
         </h2>
       </div>
       <div
@@ -1299,7 +1304,7 @@ const Ecosystem: Page = () => (
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: 32,
-          marginBottom: 56,
+          marginBottom: 32,
         }}
       >
         <StatBlock value="628" label="GitHub stars" />
@@ -1361,11 +1366,67 @@ const Ecosystem: Page = () => (
             cmd="docs.ferriskey.rs"
             label="Documentation, guides d’intégration OIDC"
           />
-          <ResourceRow
-            cmd="Discord · @ferriskey"
-            label="Communauté active, support et discussions"
-          />
         </div>
+      </div>
+
+      <div
+        style={{
+          marginTop: 12,
+          marginLeft: "auto",
+          width: "fit-content",
+          display: "flex",
+          alignItems: "center",
+          gap: 24,
+          padding: "14px 20px",
+          border: `1px solid ${border}`,
+          borderRadius: "var(--osd-radius)",
+          background: surface,
+        }}
+      >
+        <div style={{ textAlign: "right" }}>
+          <div
+            style={{
+              fontFamily: "var(--osd-font-display)",
+              fontSize: 14,
+              color: "var(--osd-accent)",
+              letterSpacing: "0.18em",
+              marginBottom: 6,
+            }}
+          >
+            REJOINDRE LA COMMUNAUTÉ
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--osd-font-display)",
+              fontSize: 20,
+              color: "var(--osd-text)",
+              marginBottom: 4,
+            }}
+          >
+            Flashez le QR ou rendez-vous sur le serveur Discord.
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--osd-font-display)",
+              fontSize: 16,
+              color: muted,
+            }}
+          >
+            discord.gg/WVV5rq8ANb
+          </div>
+        </div>
+        <img
+          src={discordQR}
+          alt="QR code · serveur Discord FerrisKey"
+          style={{
+            width: 108,
+            height: 108,
+            background: "#ffffff",
+            padding: 6,
+            borderRadius: 4,
+            border: `1px solid ${border}`,
+          }}
+        />
       </div>
     </div>
 
