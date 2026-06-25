@@ -3,6 +3,7 @@ import cloudIamLogo from "./assets/cloud-iam.svg";
 import baptistePhoto from "./assets/baptiste.jpeg";
 import nathaelPhoto from "./assets/nathael.jpeg";
 import gildedHealthLogo from "./assets/gilded-health.svg";
+import qrGithub from "./assets/qr-github.svg";
 import type {
   DesignSystem,
   Page,
@@ -10,7 +11,6 @@ import type {
   SlideTransition,
 } from "@open-slide/core";
 import {
-  ImagePlaceholder,
   Step,
   Steps,
   useSlidePageNumber,
@@ -578,14 +578,14 @@ const Speakers: Page = () => (
       <SpeakerCard
         photo={baptistePhoto}
         name="Baptiste Parmantier"
-        role="Freelance"
+        role="Software Engineer • Freelance"
         company="IAM Consultant"
       />
       <SpeakerCard
         photo={nathaelPhoto}
         name="Nathael Bonnal"
         role="Software Engineer"
-        company="@ Cloud-IAM"
+        company="@Cloud-IAM"
       />
     </div>
   </Stage>
@@ -1012,21 +1012,37 @@ const Panorama: Page = () => (
 // 10 — FerrisKey : vision & positionnement
 // ----------------------------------------------------------------------------
 
-const AxisCard = ({ children }: { children: React.ReactNode }) => (
+const AxisCard = ({
+  title,
+  desc,
+}: {
+  title: React.ReactNode;
+  desc: React.ReactNode;
+}) => (
   <div
     style={{
       background: surface,
       border: `1px solid ${hairline}`,
       borderTop: `3px solid var(--osd-accent)`,
       borderRadius: "var(--osd-radius)",
-      padding: "26px 28px",
-      fontFamily: "var(--osd-font-display)",
-      fontSize: 32,
-      fontWeight: 600,
-      lineHeight: 1.2,
+      padding: "22px 24px",
+      display: "flex",
+      flexDirection: "column",
     }}
   >
-    {children}
+    <div
+      style={{
+        fontFamily: "var(--osd-font-display)",
+        fontSize: 24,
+        fontWeight: 600,
+        lineHeight: 1.2,
+      }}
+    >
+      {title}
+    </div>
+    <p style={{ fontSize: 20, color: muted, lineHeight: 1.4, margin: "10px 0 0" }}>
+      {desc}
+    </p>
   </div>
 );
 
@@ -1049,10 +1065,23 @@ const Vision: Page = () => (
       <span style={{ color: "var(--osd-text)" }}>fermés</span>, trop{" "}
       <span style={{ color: "var(--osd-text)" }}>gourmands</span>.
     </p>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
-      <AxisCard>Simplicité d&apos;apprentissage</AxisCard>
-      <AxisCard>Simplicité de distribution</AxisCard>
-      <AxisCard>Performance Rust</AxisCard>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+      <AxisCard
+        title="Simplicité d'apprentissage"
+        desc="Concepts IAM limpides, prise en main rapide."
+      />
+      <AxisCard
+        title="Simplicité de distribution"
+        desc="Binaire unique, conteneur ou Helm chart."
+      />
+      <AxisCard
+        title="Ouvert & extensible"
+        desc="Standards ouverts, API & webhooks extensibles."
+      />
+      <AxisCard
+        title="Devenir la référence"
+        desc="La doc pédagogique de référence des concepts d'IAM."
+      />
     </div>
     <div style={{ display: "flex", gap: 90, marginTop: 36 }}>
       <Stat value="48" label="contributeurs" />
@@ -1491,22 +1520,7 @@ const Conclusion: Page = () => (
         </p>
         <div>
           <CtaRow label="GitHub" value="github.com/ferriskey/ferriskey" />
-          <CtaRow
-            label="Code AsynConf"
-            value={
-              <span
-                style={{
-                  background: rustSoft,
-                  border: `1px solid var(--osd-accent)`,
-                  borderRadius: 6,
-                  padding: "4px 14px",
-                  color: rustInk,
-                }}
-              >
-                FERRIS15
-              </span>
-            }
-          />
+          <CtaRow label="Site web" value="ferriskey.rs" />
         </div>
       </div>
       <div
@@ -1521,7 +1535,13 @@ const Conclusion: Page = () => (
           gap: 14,
         }}
       >
-        <ImagePlaceholder hint="QR code → docs.ferriskey.rs / Discord / GitHub" width={300} height={300} />
+        <img
+          src={qrGithub}
+          alt="QR code vers github.com/ferriskey/ferriskey"
+          width={300}
+          height={300}
+          style={{ display: "block", borderRadius: 4 }}
+        />
         <div style={{ fontFamily: mono, fontSize: 18, color: muted, letterSpacing: "0.08em" }}>
           docs · Discord · GitHub
         </div>
