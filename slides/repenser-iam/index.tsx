@@ -1,4 +1,8 @@
 import { useEffect } from "react";
+import cloudIamLogo from "./assets/cloud-iam.svg";
+import baptistePhoto from "./assets/baptiste.jpeg";
+import nathaelPhoto from "./assets/nathael.jpeg";
+import gildedHealthLogo from "./assets/gilded-health.svg";
 import type {
   DesignSystem,
   Page,
@@ -350,8 +354,8 @@ const Bullets = ({ children }: { children: React.ReactNode }) => (
 const Chip = ({ children }: { children: React.ReactNode }) => (
   <span
     style={{
-      fontSize: 30,
-      padding: "14px 26px",
+      fontSize: 28,
+      padding: "10px 22px",
       background: surface,
       border: `1px solid ${hairline}`,
       borderRadius: "var(--osd-radius)",
@@ -359,6 +363,26 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
       whiteSpace: "nowrap",
     }}
   >
+    {children}
+  </span>
+);
+
+const SoonChip = ({ children }: { children: React.ReactNode }) => (
+  <span
+    style={{
+      fontSize: 26,
+      padding: "9px 20px",
+      background: "transparent",
+      border: `1.5px dashed ${hairline}`,
+      borderRadius: "var(--osd-radius)",
+      color: muted,
+      whiteSpace: "nowrap",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 8,
+    }}
+  >
+    <span style={{ color: "var(--osd-accent)", fontSize: 9 }}>●</span>
     {children}
   </span>
 );
@@ -477,7 +501,98 @@ const Cover: Page = () => (
 Cover.transition = coverTransition;
 
 // ----------------------------------------------------------------------------
-// 02 — Agenda
+// 02 — Speakers
+// ----------------------------------------------------------------------------
+
+const SpeakerCard = ({
+  photo,
+  name,
+  role,
+  company,
+}: {
+  photo: string;
+  name: string;
+  role: string;
+  company?: string;
+}) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 28,
+    }}
+  >
+    <div
+      style={{
+        width: 220,
+        height: 220,
+        borderRadius: "50%",
+        overflow: "hidden",
+        border: `3px solid var(--osd-accent)`,
+        flexShrink: 0,
+      }}
+    >
+      <img
+        src={photo}
+        alt={name}
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
+    </div>
+    <div style={{ textAlign: "center" }}>
+      <div
+        style={{
+          fontFamily: "var(--osd-font-display)",
+          fontSize: 46,
+          fontWeight: 600,
+          marginBottom: 10,
+        }}
+      >
+        {name}
+      </div>
+      <div style={{ fontFamily: mono, fontSize: 24, color: "var(--osd-accent)", letterSpacing: "0.06em" }}>
+        {role}
+      </div>
+      {company && (
+        <div style={{ fontFamily: mono, fontSize: 21, color: muted, marginTop: 6 }}>
+          {company}
+        </div>
+      )}
+    </div>
+  </div>
+);
+
+const Speakers: Page = () => (
+  <Stage justify="center" pad="0 160px" mark footerLabel="REPENSER L'IAM">
+    <Eyebrow>Vos speakers</Eyebrow>
+    <h2 style={{ ...display(68), margin: "24px 0 72px", textAlign: "center" }}>
+      Qui sommes-<Accent>nous</Accent> ?
+    </h2>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 80,
+      }}
+    >
+      <SpeakerCard
+        photo={baptistePhoto}
+        name="Baptiste Parmantier"
+        role="Freelance"
+        company="IAM Consultant"
+      />
+      <SpeakerCard
+        photo={nathaelPhoto}
+        name="Nathael Bonnal"
+        role="Software Engineer"
+        company="@ Cloud-IAM"
+      />
+    </div>
+  </Stage>
+);
+
+// ----------------------------------------------------------------------------
+// 03 — Agenda
 // ----------------------------------------------------------------------------
 
 const AgendaRow = ({
@@ -813,6 +928,7 @@ const WiamCiam: Page = () => (
           <Li>volume limité</Li>
           <Li>priorité conformité &amp; audit</Li>
           <Li>intégration AD / LDAP</Li>
+          <Li>auth centralisée : Kubernetes, PostgreSQL, SSH…</Li>
         </Bullets>
       </TopCard>
       <TopCard tag="clients finaux · externes" title="CIAM">
@@ -874,11 +990,11 @@ const Panorama: Page = () => (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
       <SolutionCard
         name="Keycloak"
-        critique={<>mature et complet, mais lourd (JVM) et complexe à opérer.</>}
+        critique={<>excellent moteur, mais tout customisation passe par des extensions à ajouter ou développer soi-même.</>}
       />
       <SolutionCard
         name="Zitadel"
-        critique={<>Go, API-first, bonne DX, mais les features avancées restent derrière le cloud.</>}
+        critique={<>Go, API-first, bonne DX, mais orienté CIAM, moins adapté aux besoins WIAM complexes.</>}
       />
       <SolutionCard
         name="Authentik"
@@ -888,10 +1004,6 @@ const Panorama: Page = () => (
         name="Ory"
         critique={<>très flexible et modulaire, mais rien de clé en main : tout est à assembler.</>}
       />
-    </div>
-    <div style={{ marginTop: 26, fontFamily: mono, fontSize: 23, color: muted }}>
-      <Accent>//</Accent> gap commun : complexité opérationnelle élevée,{" "}
-      <span style={{ color: "var(--osd-text)" }}>déploiement K8s non natif</span>.
     </div>
   </Stage>
 );
@@ -943,8 +1055,13 @@ const Vision: Page = () => (
       <AxisCard>Performance Rust</AxisCard>
     </div>
     <div style={{ display: "flex", gap: 90, marginTop: 36 }}>
-      <Stat value="~40" label="contributeurs" />
+      <Stat value="48" label="contributeurs" />
+      <Stat value="646" label="GitHub stars" />
       <Stat value="100%" label="open source · Apache 2.0" />
+    </div>
+    <div style={{ marginTop: 28, fontFamily: mono, fontSize: 23, color: muted }}>
+      <Accent>//</Accent> cible :{" "}
+      <span style={{ color: "var(--osd-text)" }}>WIAM + CIAM</span>, du startup au scale-up.
     </div>
   </Stage>
 );
@@ -954,21 +1071,49 @@ const Vision: Page = () => (
 // ----------------------------------------------------------------------------
 
 const Features: Page = () => (
-  <Stage justify="center" mark footerLabel="FERRISKEY · FEATURES">
+  <Stage pad="80px 120px 120px" mark footerLabel="FERRISKEY · FEATURES">
     <Eyebrow>FerrisKey</Eyebrow>
-    <h2 style={{ ...display(66), margin: "22px 0 40px" }}>
+    <h2 style={{ ...display(62), margin: "18px 0 26px" }}>
       Features <Accent>clés</Accent>.
     </h2>
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 16, maxWidth: 1620 }}>
-      <Chip>Passkeys</Chip>
-      <Chip>Magic Link</Chip>
-      <Chip>Organizations · multi-tenant</Chip>
-      <Chip>Email Builder</Chip>
-      <Chip>Extensible User Attributes</Chip>
-      <Chip>OpenTelemetry</Chip>
-      <Chip>OIDC complet</Chip>
-      <Chip>MFA · TOTP + WebAuthn</Chip>
-      <Chip>Maintenance Mode</Chip>
+    <div style={{ marginBottom: 22 }}>
+      <div style={{ fontFamily: mono, fontSize: 17, letterSpacing: "0.14em", textTransform: "uppercase", color: muted, marginBottom: 14 }}>
+        disponible
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, maxWidth: 1660 }}>
+        <Chip>Passkeys</Chip>
+        <Chip>Magic Link</Chip>
+        <Chip>Organizations · multi-tenant</Chip>
+        <Chip>Email Builder</Chip>
+        <Chip>Extensible User Attributes</Chip>
+        <Chip>OpenTelemetry</Chip>
+        <Chip>OIDC complet</Chip>
+        <Chip>MFA · TOTP + WebAuthn</Chip>
+        <Chip>Maintenance Mode</Chip>
+        <Chip>Terraform</Chip>
+        <Chip>CLI</Chip>
+        <Chip>Opérateur K8S &amp; Helm Chart</Chip>
+        <Chip>CIAM Panel</Chip>
+        <Chip>Theme Auth Builder</Chip>
+        <Chip>Webhooks</Chip>
+        <Chip>Seawatch · Audit logs</Chip>
+        <Chip>Compass · Auth debugger</Chip>
+        <Chip>User Federation</Chip>
+      </div>
+    </div>
+    <div>
+      <div style={{ fontFamily: mono, fontSize: 17, letterSpacing: "0.14em", textTransform: "uppercase", color: muted, marginBottom: 14 }}>
+        bientôt
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, maxWidth: 1660 }}>
+        <SoonChip>Token Exchange</SoonChip>
+        <SoonChip>Cross App Domain</SoonChip>
+        <SoonChip>Adaptative Auth</SoonChip>
+        <SoonChip>Login Experience · B2C, B2B…</SoonChip>
+        <SoonChip>AuthZen integration</SoonChip>
+        <SoonChip>Auth flow · OPA Engine</SoonChip>
+        <SoonChip>Data Source for context</SoonChip>
+      </div>
     </div>
   </Stage>
 );
@@ -1050,24 +1195,33 @@ const RustCard = ({
 const WhyRust: Page = () => (
   <Stage pad="78px 120px 120px" footerLabel="FERRISKEY · POURQUOI RUST">
     <Eyebrow>FerrisKey</Eyebrow>
-    <h2 style={{ ...display(62), margin: "20px 0 28px" }}>
+    <h2 style={{ ...display(62), margin: "20px 0 24px" }}>
       Pourquoi <Accent>Rust</Accent> ?
     </h2>
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
-      <Steps>
-        <Step>
-          <RustCard title="Pas de GC" consequence="latence P99 maîtrisée, pas de pauses imprévisibles." />
-        </Step>
-        <Step>
-          <RustCard title="Sécurité mémoire" consequence="buffer overflow et use-after-free éliminés à la compilation." />
-        </Step>
-        <Step>
-          <RustCard title="Empreinte faible" consequence="container léger, démarrage rapide, moins de ressources." />
-        </Step>
-        <Step>
-          <RustCard title="Architecture hexagonale" consequence="logique métier isolée, testabilité maximale." />
-        </Step>
-      </Steps>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <Steps>
+          <Step>
+            <RustCard title="Pas de GC" consequence="latence P99 maîtrisée, pas de pauses imprévisibles." />
+          </Step>
+          <Step>
+            <RustCard title="Sécurité mémoire" consequence="buffer overflow et use-after-free éliminés à la compilation." />
+          </Step>
+          <Step>
+            <RustCard title="Typage fort · Ownership" consequence="chaque état modélisé dans les types, le compilateur refuse le code incohérent, qu'il vienne d'un humain ou d'une IA." />
+          </Step>
+        </Steps>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <Steps>
+          <Step>
+            <RustCard title="Empreinte faible" consequence="container léger, démarrage rapide, moins de ressources." />
+          </Step>
+          <Step>
+            <RustCard title="Architecture hexagonale" consequence="logique métier isolée, testabilité maximale." />
+          </Step>
+        </Steps>
+      </div>
     </div>
   </Stage>
 );
@@ -1182,14 +1336,92 @@ const Standards: Page = () => (
       />
     </div>
     <div style={{ marginTop: 24, fontFamily: mono, fontSize: 22, color: muted }}>
-      <Accent>//</Accent> en prod d&apos;ici 2-3 ans. On construit FerrisKey{" "}
-      <span style={{ color: "var(--osd-text)" }}>aujourd&apos;hui</span> pour être prêts le jour où ils débarquent.
+      <Accent>//</Accent> dans la roadmap FerrisKey, en pleine{" "}
+      <span style={{ color: "var(--osd-text)" }}>réflexion et conception architecturale</span>.
     </div>
   </Stage>
 );
 
 // ----------------------------------------------------------------------------
-// 17 — Conclusion & CTA
+// 17 — Supporters
+// ----------------------------------------------------------------------------
+
+const SponsorCard = ({
+  logo,
+  logoHeight = 64,
+  name,
+  description,
+  note,
+}: {
+  logo: string;
+  logoHeight?: number;
+  name?: string;
+  description: string;
+  note?: string;
+}) => (
+  <div
+    style={{
+      background: surface,
+      border: `1px solid ${hairline}`,
+      borderTop: `3px solid var(--osd-accent)`,
+      borderRadius: "var(--osd-radius)",
+      padding: "44px 52px",
+      display: "flex",
+      flexDirection: "column",
+      gap: 24,
+    }}
+  >
+    <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+      <img src={logo} alt={name} style={{ height: logoHeight, width: "auto" }} />
+      {name && (
+        <span
+          style={{
+            fontFamily: "var(--osd-font-display)",
+            fontSize: 38,
+            fontWeight: 600,
+            color: "var(--osd-text)",
+          }}
+        >
+          {name}
+        </span>
+      )}
+    </div>
+    <p style={{ fontSize: 28, lineHeight: 1.55, color: muted, margin: 0 }}>
+      {description}
+    </p>
+    {note && (
+      <div style={{ fontFamily: mono, fontSize: 20, color: muted }}>
+        <Accent>//</Accent> {note}
+      </div>
+    )}
+  </div>
+);
+
+const Supporters: Page = () => (
+  <Stage justify="center" pad="0 140px" footerLabel="REMERCIEMENTS">
+    <Eyebrow>Ils nous soutiennent</Eyebrow>
+    <h2 style={{ ...display(72), margin: "28px 0 52px" }}>
+      Merci à nos <Accent>sponsors</Accent>.
+    </h2>
+    <div style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 24 }}>
+      <SponsorCard
+        logo={cloudIamLogo}
+        logoHeight={60}
+        description="C'est grâce à Cloud IAM qu'on peut participer à des événements comme celui-ci et faire grandir FerrisKey."
+        note="Nathael Bonnal · Software Engineer @ Cloud IAM"
+      />
+      <SponsorCard
+        logo={gildedHealthLogo}
+        logoHeight={64}
+        name="Gilded Health"
+        description="Sponsor via GitHub Sponsors, ils soutiennent FerrisKey financièrement."
+      />
+    </div>
+  </Stage>
+);
+
+// ----------------------------------------------------------------------------
+// 18 — Conclusion & CTA
 // ----------------------------------------------------------------------------
 
 const CtaRow = ({
@@ -1330,6 +1562,7 @@ export const meta: SlideMeta = {
 
 export default [
   Cover,
+  Speakers,
   Agenda,
   Identity,
   AuthNZ,
@@ -1345,5 +1578,6 @@ export default [
   AgentEra,
   TokenExchange,
   Standards,
+  Supporters,
   Conclusion,
 ] satisfies Page[];
