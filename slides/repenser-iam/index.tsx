@@ -247,7 +247,7 @@ const CrabMark = ({
 
 const Stage = ({
   children,
-  justify = "flex-start",
+  justify = "center",
   pad = "92px 120px 120px",
   grid = false,
   mark = false,
@@ -917,32 +917,31 @@ const GoldenRule: Page = () => (
 
 const WiamCiam: Page = () => (
   <Stage pad="80px 120px 120px" footerLabel="ÉCOSYSTÈME · WIAM / CIAM">
-    <Eyebrow>Deux mondes</Eyebrow>
-    <h2 style={{ ...display(62), margin: "22px 0 30px" }}>
-      WIAM <Accent>vs</Accent> CIAM.
+    <Eyebrow>WIAM · CIAM</Eyebrow>
+    <h2 style={{ ...display(64), margin: "22px 0 28px" }}>
+      L&apos;un est captif. <Accent>L&apos;autre est libre.</Accent>
     </h2>
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26 }}>
-      <TopCard tag="collaborateurs · internes" title="WIAM">
+      <TopCard tag="WIAM" title="Le collaborateur n'a pas le choix">
         <Bullets>
-          <Li>employés &amp; contractors</Li>
-          <Li>volume limité</Li>
-          <Li>priorité conformité &amp; audit</Li>
-          <Li>intégration AD / LDAP</Li>
-          <Li>auth centralisée : Kubernetes, PostgreSQL, SSH…</Li>
+          <Li>tu peux lui imposer un Yubikey</Li>
+          <Li>tu peux exiger un mot de passe long</Li>
+          <Li>tu peux le couper en 30 secondes</Li>
+          <Li>il revient le lendemain</Li>
         </Bullets>
       </TopCard>
-      <TopCard tag="clients finaux · externes" title="CIAM">
+      <TopCard tag="CIAM" title="Le client peut fermer l'onglet">
         <Bullets>
-          <Li>clients finaux</Li>
-          <Li>volume massif</Li>
-          <Li>priorité UX &amp; conversion</Li>
-          <Li>consentement RGPD · self-service</Li>
+          <Li>un MFA de trop, il abandonne</Li>
+          <Li>un mot de passe oublié, tu perds une vente</Li>
+          <Li>ses données lui appartiennent</Li>
+          <Li>il revient si tu lui as plu</Li>
         </Bullets>
       </TopCard>
     </div>
     <div style={{ marginTop: 28, fontFamily: mono, fontSize: 23, color: muted }}>
-      <Accent>//</Accent> la plupart des solutions sont WIAM-first ou CIAM-only.{" "}
-      <span style={{ color: "var(--osd-text)" }}>Rarement les deux.</span>
+      <Accent>//</Accent> la friction qui sécurise l&apos;un{" "}
+      <span style={{ color: "var(--osd-text)" }}>fait fuir l&apos;autre</span>.
     </div>
   </Stage>
 );
@@ -1019,9 +1018,9 @@ const CaseCard = ({
 
 const WiamInPractice: Page = () => (
   <Stage pad="78px 120px 120px" footerLabel="ÉCOSYSTÈME · WIAM EN PRATIQUE">
-    <Eyebrow>WIAM · cas réel</Eyebrow>
-    <h2 style={{ ...display(60), margin: "20px 0 26px" }}>
-      Google · les deux faces du <Accent>WIAM</Accent>.
+    <Eyebrow>WIAM · sur le terrain</Eyebrow>
+    <h2 style={{ ...display(64), margin: "20px 0 26px" }}>
+      Le pouvoir d&apos;<Accent>imposer</Accent>.
     </h2>
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
       <CaseCard
@@ -1029,11 +1028,11 @@ const WiamInPractice: Page = () => (
         title="Google Workspace"
         persona={<>un employé Google qui arrive lundi matin.</>}
         capabilities={[
-          "provisioning depuis le SIRH",
-          "SSO sur Gmail, Drive, Jira, GitHub Enterprise",
-          "MFA matériel imposé",
-          "révocation en 30 s en cas de départ",
-          "audit logs SOC2 · ISO 27001",
+          "provisioning SIRH",
+          "SSO Gmail · Drive · Jira · GitHub",
+          "MFA matériel",
+          "révocation en 30 s",
+          "audit SOC2 · ISO 27001",
         ]}
         footer={<><Accent>// </Accent>~180 k employés, volume borné.</>}
       />
@@ -1042,21 +1041,18 @@ const WiamInPractice: Page = () => (
         title="GCP IAM"
         persona={<>une pipeline CI qui déploie en prod.</>}
         capabilities={[
-          "service accounts à durée bornée",
-          "rôles IAM granulaires par ressource",
-          "Workload Identity Federation, zéro clé qui traîne",
-          "policies versionnées en IaC",
-          "audit complet via Cloud Audit Logs",
+          "service accounts éphémères",
+          "rôles granulaires par ressource",
+          "Workload Identity Federation",
+          "policies en IaC",
+          "Cloud Audit Logs",
         ]}
         footer={<><Accent>// </Accent>millions de ressources, milliers de SA.</>}
       />
     </div>
     <div style={{ marginTop: 24, fontFamily: mono, fontSize: 23, color: muted }}>
-      <Accent>//</Accent>{" "}
-      <span style={{ color: "var(--osd-text)" }}>
-        gouvernance, least privilege, traçabilité
-      </span>
-      . Sur l&apos;humain comme sur la machine.
+      <Accent>//</Accent> ce que la{" "}
+      <span style={{ color: "var(--osd-text)" }}>captivité permet</span>.
     </div>
   </Stage>
 );
@@ -1067,21 +1063,21 @@ const WiamInPractice: Page = () => (
 
 const CiamInPractice: Page = () => (
   <Stage pad="78px 120px 120px" footerLabel="ÉCOSYSTÈME · CIAM EN PRATIQUE">
-    <Eyebrow>CIAM · cas réel</Eyebrow>
-    <h2 style={{ ...display(60), margin: "20px 0 26px" }}>
-      Auth0 &amp; <Accent>Sign in with Google</Accent>.
+    <Eyebrow>CIAM · sur le terrain</Eyebrow>
+    <h2 style={{ ...display(64), margin: "20px 0 26px" }}>
+      L&apos;art de <Accent>séduire</Accent>.
     </h2>
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
       <CaseCard
         tag="produit ciam"
         title="Auth0"
-        persona={<>un visiteur sur un e-commerce, prêt à acheter en deux clics.</>}
+        persona={<>un visiteur prêt à acheter en deux clics.</>}
         capabilities={[
-          "login social, magic link, passkeys",
-          "page d'auth aux couleurs de la marque",
-          "consentement RGPD, récupération self-service",
-          "anti-bot, détection d'anomalies",
-          "A/B test du tunnel d'inscription",
+          "login social · magic link · passkeys",
+          "page d'auth brandée",
+          "RGPD · récupération self-service",
+          "anti-bot · anti-fraude",
+          "A/B test du tunnel",
         ]}
         footer={<><Accent>// </Accent>KPI = conversion, pas conformité.</>}
       />
@@ -1090,21 +1086,18 @@ const CiamInPractice: Page = () => (
         title="Sign in with Google"
         persona={<>l&apos;utilisateur qui se connecte à Notion, Spotify, Figma…</>}
         capabilities={[
-          "OAuth2 / OIDC à l'échelle du milliard",
-          "écran de consentement & gestion des scopes",
-          "révocation par l'utilisateur depuis son compte Google",
-          "fédération vers des millions d'apps tierces",
+          "OAuth2 / OIDC à l'échelle",
+          "consentement · scopes",
+          "révocation côté utilisateur",
+          "fédération vers des millions d'apps",
           "détection de comptes compromis",
         ]}
         footer={<><Accent>// </Accent>l&apos;IdP devient une infra publique.</>}
       />
     </div>
     <div style={{ marginTop: 24, fontFamily: mono, fontSize: 23, color: muted }}>
-      <Accent>//</Accent>{" "}
-      <span style={{ color: "var(--osd-text)" }}>
-        UX, scale, consentement
-      </span>
-      . Sur des millions d&apos;utilisateurs anonymes.
+      <Accent>//</Accent> ce que la{" "}
+      <span style={{ color: "var(--osd-text)" }}>liberté force</span>.
     </div>
   </Stage>
 );
@@ -1152,19 +1145,19 @@ const Panorama: Page = () => (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
       <SolutionCard
         name="Keycloak"
-        critique={<>excellent moteur, mais tout customisation passe par des extensions à ajouter ou développer soi-même.</>}
+        critique={<>moteur solide. Customisation par extensions, à coder.</>}
       />
       <SolutionCard
         name="Zitadel"
-        critique={<>Go, API-first, bonne DX, mais orienté CIAM, moins adapté aux besoins WIAM complexes.</>}
+        critique={<>Go, API-first, DX propre. Orienté CIAM.</>}
       />
       <SolutionCard
         name="Authentik"
-        critique={<>excellent en WIAM &amp; proxy auth, moins adapté au CIAM à grande échelle.</>}
+        critique={<>fort en WIAM &amp; proxy auth. CIAM à l&apos;échelle, non.</>}
       />
       <SolutionCard
         name="Ory"
-        critique={<>très flexible et modulaire, mais rien de clé en main : tout est à assembler.</>}
+        critique={<>modulaire à l&apos;extrême. Rien de clé en main.</>}
       />
     </div>
   </Stage>
@@ -1216,13 +1209,13 @@ const Stat = ({ value, label }: { value: string; label: string }) => (
 );
 
 const Vision: Page = () => (
-  <Stage pad="80px 120px 120px" mark footerLabel="FERRISKEY · VISION">
+  <Stage justify="flex-start" pad="80px 120px 120px" mark footerLabel="FERRISKEY · VISION">
     <Eyebrow>FerrisKey</Eyebrow>
     <h2 style={{ ...display(60), margin: "20px 0 22px" }}>
       Vision &amp; <Accent>positionnement</Accent>.
     </h2>
     <p style={{ fontSize: 34, color: muted, lineHeight: 1.45, margin: "0 0 30px", maxWidth: 1500 }}>
-      Né d&apos;une frustration : les IAM existants sont trop{" "}
+      Les IAM existants sont trop{" "}
       <span style={{ color: "var(--osd-text)" }}>complexes</span>, trop{" "}
       <span style={{ color: "var(--osd-text)" }}>fermés</span>, trop{" "}
       <span style={{ color: "var(--osd-text)" }}>gourmands</span>.
@@ -1230,19 +1223,19 @@ const Vision: Page = () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
       <AxisCard
         title="Simplicité d'apprentissage"
-        desc="Concepts IAM limpides, prise en main rapide."
+        desc="Prise en main rapide."
       />
       <AxisCard
         title="Simplicité de distribution"
-        desc="Binaire unique, conteneur ou Helm chart."
+        desc="Binaire, conteneur, Helm."
       />
       <AxisCard
         title="Ouvert & extensible"
-        desc="Standards ouverts, API & webhooks extensibles."
+        desc="Standards, API, webhooks."
       />
       <AxisCard
         title="Devenir la référence"
-        desc="La doc pédagogique de référence des concepts d'IAM."
+        desc="La doc IAM la plus pédagogique."
       />
     </div>
     <div style={{ display: "flex", gap: 90, marginTop: 36 }}>
@@ -1262,7 +1255,7 @@ const Vision: Page = () => (
 // ----------------------------------------------------------------------------
 
 const Features: Page = () => (
-  <Stage pad="80px 120px 120px" mark footerLabel="FERRISKEY · FEATURES">
+  <Stage justify="flex-start" pad="80px 120px 120px" mark footerLabel="FERRISKEY · FEATURES">
     <Eyebrow>FerrisKey</Eyebrow>
     <h2 style={{ ...display(62), margin: "18px 0 26px" }}>
       Features <Accent>clés</Accent>.
@@ -1334,14 +1327,14 @@ const Distribution: Page = () => (
       Distribution <Accent>cloud-native</Accent>.
     </h2>
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
-      <DistCard tag="helm" title="Helm Chart" desc="déploiement K8s en une commande, production-ready." />
-      <DistCard tag="operator" title="Opérateur Kubernetes" desc="gestion déclarative via CRDs." />
-      <DistCard tag="cli" title="CLI" desc="bootstrap, import / export, GitOps-friendly." />
-      <DistCard tag="terraform" title="Terraform Provider" desc="realms, clients, scopes versionnés en IaC." />
+      <DistCard tag="helm" title="Helm Chart" desc="déploiement K8s en une commande." />
+      <DistCard tag="operator" title="Opérateur Kubernetes" desc="déclaratif, via CRDs." />
+      <DistCard tag="cli" title="CLI" desc="bootstrap, import / export." />
+      <DistCard tag="terraform" title="Terraform Provider" desc="realms, clients, scopes en IaC." />
     </div>
     <div style={{ marginTop: 26, fontFamily: mono, fontSize: 23, color: muted }}>
-      <Accent>//</Accent> ton IAM entre dans ton GitOps workflow comme{" "}
-      <span style={{ color: "var(--osd-text)" }}>n&apos;importe quelle autre infra</span>.
+      <Accent>//</Accent> ton IAM dans ton GitOps, comme{" "}
+      <span style={{ color: "var(--osd-text)" }}>n&apos;importe quelle infra</span>.
     </div>
   </Stage>
 );
@@ -1384,7 +1377,7 @@ const RustCard = ({
 );
 
 const WhyRust: Page = () => (
-  <Stage pad="78px 120px 120px" footerLabel="FERRISKEY · POURQUOI RUST">
+  <Stage justify="flex-start" pad="78px 120px 120px" footerLabel="FERRISKEY · POURQUOI RUST">
     <Eyebrow>FerrisKey</Eyebrow>
     <h2 style={{ ...display(62), margin: "20px 0 24px" }}>
       Pourquoi <Accent>Rust</Accent> ?
@@ -1393,23 +1386,23 @@ const WhyRust: Page = () => (
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         <Steps>
           <Step>
-            <RustCard title="Pas de GC" consequence="latence P99 maîtrisée, pas de pauses imprévisibles." />
+            <RustCard title="Pas de GC" consequence="P99 maîtrisée, zéro pause." />
           </Step>
           <Step>
-            <RustCard title="Sécurité mémoire" consequence="buffer overflow et use-after-free éliminés à la compilation." />
+            <RustCard title="Sécurité mémoire" consequence="overflow & use-after-free éliminés à la compilation." />
           </Step>
           <Step>
-            <RustCard title="Typage fort · Ownership" consequence="chaque état modélisé dans les types, le compilateur refuse le code incohérent, qu'il vienne d'un humain ou d'une IA." />
+            <RustCard title="Typage fort · Ownership" consequence="le compilateur refuse le code incohérent. Humain ou IA." />
           </Step>
         </Steps>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         <Steps>
           <Step>
-            <RustCard title="Empreinte faible" consequence="container léger, démarrage rapide, moins de ressources." />
+            <RustCard title="Empreinte faible" consequence="container léger, démarrage rapide." />
           </Step>
           <Step>
-            <RustCard title="Architecture hexagonale" consequence="logique métier isolée, testabilité maximale." />
+            <RustCard title="Architecture hexagonale" consequence="logique métier isolée. Tests faciles." />
           </Step>
         </Steps>
       </div>
@@ -1537,29 +1530,28 @@ const AgentScenario: Page = () => (
         maxWidth: 1500,
       }}
     >
-      Tu lances un agent qui doit auditer ton infra AWS, ouvrir des PRs sur GitHub
-      et déléguer à des sous-agents pendant la nuit.
+      Il audite ton AWS, ouvre des PRs sur GitHub, délègue à des sous-agents.
     </p>
     <div>
       <ScenarioStep
         num="01"
-        action={<>reçoit ton token pour démarrer.</>}
-        breaks={<>token long-lived, scope large. Une prompt injection suffit à tout compromettre.</>}
+        action={<>reçoit ton token.</>}
+        breaks={<>long-lived, scope large. Une injection le compromet.</>}
       />
       <ScenarioStep
         num="02"
-        action={<>appelle l&apos;API AWS pour lister les ressources.</>}
-        breaks={<>il a tes droits complets, pas seulement <em>read-only</em> sur ce périmètre.</>}
+        action={<>appelle l&apos;API AWS.</>}
+        breaks={<>tes droits complets, pas un <em>read-only</em>.</>}
       />
       <ScenarioStep
         num="03"
-        action={<>délègue à un sous-agent pour ouvrir une PR sur GitHub.</>}
-        breaks={<>le sous-agent hérite du token parent. Aucune réduction de scope, aucune borne temporelle.</>}
+        action={<>délègue à un sous-agent.</>}
+        breaks={<>il hérite de tout. Aucun rétrécissement de scope.</>}
       />
       <ScenarioStep
         num="04"
-        action={<>termine à 4h du matin, log d&apos;audit côté AWS.</>}
-        breaks={<>«&nbsp;user X a fait ça&nbsp;». Toi ou l&apos;agent ? Quel sous-agent ? Le log ne te le dira pas.</>}
+        action={<>termine à 4h, log côté AWS.</>}
+        breaks={<>«&nbsp;user X a fait ça&nbsp;». Toi ? L&apos;agent ? Quel sous-agent ?</>}
       />
     </div>
   </Stage>
@@ -1655,27 +1647,27 @@ const AgentPrinciples: Page = () => (
       <PrincipleRow
         num="01"
         title={<>Identité <Accent>dérivée</Accent>, jamais primaire</>}
-        detail="l'agent ne se connecte pas. Il reçoit un token frappé pour lui."
+        detail="un token frappé pour lui, pas un login."
       />
       <PrincipleRow
         num="02"
         title={<>Scope ⊆ parent · jamais ⊃</>}
-        detail="chaque délégation rétrécit les droits, jamais l'inverse."
+        detail="rétrécir, jamais élargir."
       />
       <PrincipleRow
         num="03"
         title="TTL court par défaut"
-        detail="minutes plutôt qu'heures, refresh explicite, expiration garantie."
+        detail="minutes, pas heures. Refresh explicite."
       />
       <PrincipleRow
         num="04"
         title="Attribution duale dans l'audit"
-        detail="chaque action porte l'identité de l'agent ET du délégataire humain."
+        detail="l'agent ET l'humain délégataire, dans chaque log."
       />
       <PrincipleRow
         num="05"
         title="Killswitch instantané"
-        detail="révocation de la chaîne entière en moins d'une seconde, sans redéploiement."
+        detail="toute la chaîne, en moins d'une seconde."
       />
     </div>
   </Stage>
