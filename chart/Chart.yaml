@@ -1,0 +1,6 @@
+apiVersion: v2
+name: slides
+description: Static deck served by nginx, exposed via Gateway API HTTPRoute.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

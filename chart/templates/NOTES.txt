@@ -1,0 +1,20 @@
+Slides released as {{ include "slides.fullname" . }}.
+
+Image:    {{ .Values.image.repository }}:{{ .Values.image.tag }}
+Replicas: {{ .Values.replicaCount }}
+
+{{- if .Values.httpRoute.enabled }}
+
+HTTPRoute attached to:
+{{- range .Values.httpRoute.parentRefs }}
+  - {{ .namespace | default "(same ns)" }}/{{ .name }}{{ with .sectionName }} (section: {{ . }}){{ end }}
+{{- end }}
+
+Exposed hostnames:
+{{- range .Values.httpRoute.hostnames }}
+  https://{{ . }}
+{{- end }}
+{{- end }}
+
+Verify with:
+  kubectl -n {{ .Release.Namespace }} get deploy,svc,httproute -l app.kubernetes.io/instance={{ .Release.Name }}

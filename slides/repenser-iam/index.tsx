@@ -948,7 +948,169 @@ const WiamCiam: Page = () => (
 );
 
 // ----------------------------------------------------------------------------
-// 09 — Panorama open source
+// 10 — WIAM en pratique · Google Workspace + GCP IAM
+// ----------------------------------------------------------------------------
+
+const CaseCard = ({
+  tag,
+  title,
+  persona,
+  capabilities,
+  footer,
+}: {
+  tag: string;
+  title: string;
+  persona: React.ReactNode;
+  capabilities: React.ReactNode[];
+  footer?: React.ReactNode;
+}) => (
+  <div
+    style={{
+      background: surface,
+      border: `1px solid ${hairline}`,
+      borderTop: `3px solid var(--osd-accent)`,
+      borderRadius: "var(--osd-radius)",
+      padding: "26px 30px",
+      display: "flex",
+      flexDirection: "column",
+    }}
+  >
+    <div
+      style={{
+        fontFamily: mono,
+        fontSize: 17,
+        letterSpacing: "0.16em",
+        textTransform: "uppercase",
+        color: "var(--osd-accent)",
+      }}
+    >
+      {tag}
+    </div>
+    <div
+      style={{
+        fontFamily: "var(--osd-font-display)",
+        fontSize: 36,
+        fontWeight: 600,
+        margin: "10px 0 14px",
+      }}
+    >
+      {title}
+    </div>
+    <div style={{ fontSize: 23, color: muted, lineHeight: 1.45, marginBottom: 14 }}>
+      <span style={{ fontFamily: mono, color: "var(--osd-accent)", fontSize: 18, letterSpacing: "0.1em", textTransform: "uppercase", marginRight: 10 }}>
+        persona
+      </span>
+      {persona}
+    </div>
+    <ul style={{ margin: 0, paddingLeft: 22 }}>
+      {capabilities.map((c, i) => (
+        <li key={i} style={{ fontSize: 22, color: "var(--osd-text)", lineHeight: 1.45, marginBottom: 6 }}>
+          {c}
+        </li>
+      ))}
+    </ul>
+    {footer && (
+      <div style={{ marginTop: 18, fontFamily: mono, fontSize: 20, color: muted }}>
+        {footer}
+      </div>
+    )}
+  </div>
+);
+
+const WiamInPractice: Page = () => (
+  <Stage pad="78px 120px 120px" footerLabel="ÉCOSYSTÈME · WIAM EN PRATIQUE">
+    <Eyebrow>WIAM · cas réel</Eyebrow>
+    <h2 style={{ ...display(60), margin: "20px 0 26px" }}>
+      Google · les deux faces du <Accent>WIAM</Accent>.
+    </h2>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
+      <CaseCard
+        tag="humains · collaborateurs"
+        title="Google Workspace"
+        persona={<>un employé Google qui arrive lundi matin.</>}
+        capabilities={[
+          "provisioning depuis le SIRH",
+          "SSO sur Gmail, Drive, Jira, GitHub Enterprise",
+          "MFA matériel imposé",
+          "révocation en 30 s en cas de départ",
+          "audit logs SOC2 · ISO 27001",
+        ]}
+        footer={<><Accent>// </Accent>~180 k employés, volume borné.</>}
+      />
+      <CaseCard
+        tag="machines · ressources"
+        title="GCP IAM"
+        persona={<>une pipeline CI qui déploie en prod.</>}
+        capabilities={[
+          "service accounts à durée bornée",
+          "rôles IAM granulaires par ressource",
+          "Workload Identity Federation, zéro clé qui traîne",
+          "policies versionnées en IaC",
+          "audit complet via Cloud Audit Logs",
+        ]}
+        footer={<><Accent>// </Accent>millions de ressources, milliers de SA.</>}
+      />
+    </div>
+    <div style={{ marginTop: 24, fontFamily: mono, fontSize: 23, color: muted }}>
+      <Accent>//</Accent>{" "}
+      <span style={{ color: "var(--osd-text)" }}>
+        gouvernance, least privilege, traçabilité
+      </span>
+      . Sur l&apos;humain comme sur la machine.
+    </div>
+  </Stage>
+);
+
+// ----------------------------------------------------------------------------
+// 11 — CIAM en pratique · Auth0 + Sign in with Google
+// ----------------------------------------------------------------------------
+
+const CiamInPractice: Page = () => (
+  <Stage pad="78px 120px 120px" footerLabel="ÉCOSYSTÈME · CIAM EN PRATIQUE">
+    <Eyebrow>CIAM · cas réel</Eyebrow>
+    <h2 style={{ ...display(60), margin: "20px 0 26px" }}>
+      Auth0 &amp; <Accent>Sign in with Google</Accent>.
+    </h2>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
+      <CaseCard
+        tag="produit ciam"
+        title="Auth0"
+        persona={<>un visiteur sur un e-commerce, prêt à acheter en deux clics.</>}
+        capabilities={[
+          "login social, magic link, passkeys",
+          "page d'auth aux couleurs de la marque",
+          "consentement RGPD, récupération self-service",
+          "anti-bot, détection d'anomalies",
+          "A/B test du tunnel d'inscription",
+        ]}
+        footer={<><Accent>// </Accent>KPI = conversion, pas conformité.</>}
+      />
+      <CaseCard
+        tag="idp public"
+        title="Sign in with Google"
+        persona={<>l&apos;utilisateur qui se connecte à Notion, Spotify, Figma…</>}
+        capabilities={[
+          "OAuth2 / OIDC à l'échelle du milliard",
+          "écran de consentement & gestion des scopes",
+          "révocation par l'utilisateur depuis son compte Google",
+          "fédération vers des millions d'apps tierces",
+          "détection de comptes compromis",
+        ]}
+        footer={<><Accent>// </Accent>l&apos;IdP devient une infra publique.</>}
+      />
+    </div>
+    <div style={{ marginTop: 24, fontFamily: mono, fontSize: 23, color: muted }}>
+      <Accent>//</Accent>{" "}
+      <span style={{ color: "var(--osd-text)" }}>
+        UX, scale, consentement
+      </span>
+      . Sur des millions d&apos;utilisateurs anonymes.
+    </div>
+  </Stage>
+);
+
+// ----------------------------------------------------------------------------
+// 12 — Panorama open source
 // ----------------------------------------------------------------------------
 
 const SolutionCard = ({
@@ -1295,6 +1457,115 @@ const AgentEra: Page = () => (
 );
 
 // ----------------------------------------------------------------------------
+// 15b — Scénario : un agent qui opère pendant 6h
+// ----------------------------------------------------------------------------
+
+const ScenarioStep = ({
+  num,
+  action,
+  breaks,
+}: {
+  num: string;
+  action: React.ReactNode;
+  breaks: React.ReactNode;
+}) => (
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "auto 1fr 1fr",
+      columnGap: 36,
+      padding: "20px 0",
+      borderTop: `1px solid ${hairline}`,
+      alignItems: "baseline",
+    }}
+  >
+    <span
+      style={{
+        fontFamily: mono,
+        fontSize: 24,
+        color: "var(--osd-accent)",
+        letterSpacing: "0.08em",
+      }}
+    >
+      {num}
+    </span>
+    <div>
+      <div
+        style={{
+          fontFamily: mono,
+          fontSize: 15,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: muted,
+          marginBottom: 6,
+        }}
+      >
+        l&apos;agent
+      </div>
+      <div style={{ fontSize: 25, lineHeight: 1.4 }}>{action}</div>
+    </div>
+    <div>
+      <div
+        style={{
+          fontFamily: mono,
+          fontSize: 15,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: "var(--osd-accent)",
+          marginBottom: 6,
+        }}
+      >
+        ce qui casse
+      </div>
+      <div style={{ fontSize: 23, color: muted, lineHeight: 1.45 }}>{breaks}</div>
+    </div>
+  </div>
+);
+
+const AgentScenario: Page = () => (
+  <Stage pad="76px 120px 120px" footerLabel="ÈRE AGENT · SCÉNARIO">
+    <Eyebrow>L&apos;ère agent · scénario</Eyebrow>
+    <h2 style={{ ...display(54), margin: "16px 0 10px" }}>
+      Un agent qui opère <Accent>6 heures</Accent> pour toi.
+    </h2>
+    <p
+      style={{
+        fontSize: 27,
+        color: muted,
+        lineHeight: 1.45,
+        margin: "0 0 18px",
+        maxWidth: 1500,
+      }}
+    >
+      Tu lances un agent qui doit auditer ton infra AWS, ouvrir des PRs sur GitHub
+      et déléguer à des sous-agents pendant la nuit.
+    </p>
+    <div>
+      <ScenarioStep
+        num="01"
+        action={<>reçoit ton token pour démarrer.</>}
+        breaks={<>token long-lived, scope large. Une prompt injection suffit à tout compromettre.</>}
+      />
+      <ScenarioStep
+        num="02"
+        action={<>appelle l&apos;API AWS pour lister les ressources.</>}
+        breaks={<>il a tes droits complets, pas seulement <em>read-only</em> sur ce périmètre.</>}
+      />
+      <ScenarioStep
+        num="03"
+        action={<>délègue à un sous-agent pour ouvrir une PR sur GitHub.</>}
+        breaks={<>le sous-agent hérite du token parent. Aucune réduction de scope, aucune borne temporelle.</>}
+      />
+      <ScenarioStep
+        num="04"
+        action={<>termine à 4h du matin, log d&apos;audit côté AWS.</>}
+        breaks={<>«&nbsp;user X a fait ça&nbsp;». Toi ou l&apos;agent ? Quel sous-agent ? Le log ne te le dira pas.</>}
+      />
+    </div>
+  </Stage>
+);
+
+// ----------------------------------------------------------------------------
 // 15 — Token Exchange & délégation
 // ----------------------------------------------------------------------------
 
@@ -1319,6 +1590,93 @@ const TokenExchange: Page = () => (
     <div style={{ marginTop: 40, fontFamily: mono, fontSize: 24, color: muted }}>
       <Accent>//</Accent> c&apos;est exactement ce qu&apos;on construit{" "}
       <span style={{ color: "var(--osd-text)" }}>nativement</span> dans FerrisKey.
+    </div>
+  </Stage>
+);
+
+// ----------------------------------------------------------------------------
+// 15c — Principes d'un IAM agent-native
+// ----------------------------------------------------------------------------
+
+const PrincipleRow = ({
+  num,
+  title,
+  detail,
+}: {
+  num: string;
+  title: React.ReactNode;
+  detail: React.ReactNode;
+}) => (
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "auto 1fr",
+      columnGap: 32,
+      padding: "18px 0",
+      borderTop: `1px solid ${hairline}`,
+      alignItems: "baseline",
+    }}
+  >
+    <span
+      style={{
+        fontFamily: mono,
+        fontSize: 26,
+        color: "var(--osd-accent)",
+        letterSpacing: "0.08em",
+      }}
+    >
+      {num}
+    </span>
+    <div>
+      <div
+        style={{
+          fontFamily: "var(--osd-font-display)",
+          fontSize: 34,
+          fontWeight: 600,
+          lineHeight: 1.2,
+        }}
+      >
+        {title}
+      </div>
+      <div style={{ fontSize: 23, color: muted, lineHeight: 1.4, marginTop: 6 }}>
+        {detail}
+      </div>
+    </div>
+  </div>
+);
+
+const AgentPrinciples: Page = () => (
+  <Stage pad="78px 120px 120px" footerLabel="ÈRE AGENT · PRINCIPES">
+    <Eyebrow>L&apos;ère agent · principes</Eyebrow>
+    <h2 style={{ ...display(56), margin: "20px 0 22px" }}>
+      Cinq principes d&apos;un IAM <Accent>agent-native</Accent>.
+    </h2>
+    <div>
+      <PrincipleRow
+        num="01"
+        title={<>Identité <Accent>dérivée</Accent>, jamais primaire</>}
+        detail="l'agent ne se connecte pas. Il reçoit un token frappé pour lui."
+      />
+      <PrincipleRow
+        num="02"
+        title={<>Scope ⊆ parent · jamais ⊃</>}
+        detail="chaque délégation rétrécit les droits, jamais l'inverse."
+      />
+      <PrincipleRow
+        num="03"
+        title="TTL court par défaut"
+        detail="minutes plutôt qu'heures, refresh explicite, expiration garantie."
+      />
+      <PrincipleRow
+        num="04"
+        title="Attribution duale dans l'audit"
+        detail="chaque action porte l'identité de l'agent ET du délégataire humain."
+      />
+      <PrincipleRow
+        num="05"
+        title="Killswitch instantané"
+        detail="révocation de la chaîne entière en moins d'une seconde, sans redéploiement."
+      />
     </div>
   </Stage>
 );
@@ -1590,13 +1948,17 @@ export default [
   IdpFedSso,
   GoldenRule,
   WiamCiam,
+  WiamInPractice,
+  CiamInPractice,
   Panorama,
   Vision,
   Features,
   Distribution,
   WhyRust,
   AgentEra,
+  AgentScenario,
   TokenExchange,
+  AgentPrinciples,
   Standards,
   Supporters,
   Conclusion,
